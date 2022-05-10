@@ -45,6 +45,9 @@ router.post("/", (req,res) => {
         })
     } else {
         Post.insert({ title, contents })
+            .then( ({ id }) => {
+                return Post.findById(id)
+            })
             .then(result => {
                 res.status(201).json(result)
             })
